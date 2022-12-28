@@ -1,0 +1,74 @@
+# default dataset paths
+# please udpate to your own paths
+
+root_path: &root_path "datasets"
+
+market1501:
+  path: *root_path
+  folder: "Market-1501"
+  download: True # if dataset not in path, automatically download and extract
+
+dukemtmcreid:
+  path: *root_path
+  folder: "DukeMTMC-reID"
+  download: False
+
+msmt17:
+  path: *root_path
+  folder: "MSMT17_V1"
+  download: False
+
+cuhk03:
+  path: *root_path
+  folder: "cuhk03_release"
+  download: False
+
+wildtrack_crop:
+  path: *root_path
+  folder: "Wildtrack_crop_dataset/crop"
+  download: False
+
+rap:
+  path: *root_path
+  folder: "rap/ids/"
+  download: False
+
+njust365:
+  path: *root_path
+  folder: "njust365"
+  download: False
+
+njust365spr:
+  path: *root_path
+  folder: "njust365"
+  download: False
+
+njust365win:
+  path: *root_path
+  folder: "njust365"
+  download: False
+
+airportalert:
+  path: *root_path
+  folder: "airport"
+  download: False
+
+prid:
+  path: *root_path
+  folder: "prid"
+  download: False
+
+occludedreid:
+  path: *root_path
+  folder: "Occluded_REID"
+  download: False
+
+partialreid:
+  path: *root_path
+  folder: "PartialREID"
+  download: False
+
+partialilids:
+  path: *root_path
+  folder: "Partial_iLIDS"
+  download: False

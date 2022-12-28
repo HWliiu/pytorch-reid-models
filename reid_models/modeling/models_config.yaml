@@ -1,0 +1,737 @@
+# default configuration
+default_mean_std: &default_mean_std
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+
+dukemtmcreid_num_classes: &dukemtmcreid_num_classes 702
+market1501_num_classes: &market1501_num_classes 751
+msmt17_num_classes: &msmt17_num_classes 1041
+combine_all_num_classes: &combine_all_num_classes 2494
+
+default_dukemtmcreid_spec: &default_dukemtmcreid_spec
+  <<: *default_mean_std
+  num_classes: *dukemtmcreid_num_classes
+
+default_market1501_spec: &default_market1501_spec
+  <<: *default_mean_std
+  num_classes: *market1501_num_classes
+
+default_msmt17_spec: &default_msmt17_spec
+  <<: *default_mean_std
+  num_classes: *msmt17_num_classes
+
+# ABD Net
+densenet121_abd:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/ABD/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-densenet121_abd-0.77-4bngo7.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/ABD/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-densenet121_abd-0.87-w17cfm.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/ABD/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-densenet121_abd-0.59-aebtes.pth
+    <<: *default_msmt17_spec
+
+resnet50_abd:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/ABD/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-resnet50_abd-0.77-gg3q9g.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/ABD/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-resnet50_abd-0.87-kbaj2f.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/ABD/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-resnet50_abd-0.58-bof8fc.pth
+    <<: *default_msmt17_spec
+
+# AGW Net
+resnet50_agw:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/AGW/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-resnet50_agw-0.79-46gfw7.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/AGW/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-resnet50_agw-0.88-5qj5pj.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/AGW/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-resnet50_agw-0.55-b02gh6.pth
+    <<: *default_msmt17_spec
+
+# AP Net
+resnet50_ap:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/AP/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-resnet50_ap-0.80-g4tmka.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/AP/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-resnet50_ap-0.89-r1hl63.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/AP/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-resnet50_ap-0.57-t17f1h.pth
+    <<: *default_msmt17_spec
+
+# Deep Person Reid
+mlfn_dpr:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/DeepPersonReid/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-mlfn_dpr-0.64-dvli7h.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/DeepPersonReid/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-mlfn_dpr-0.74-sbev3k.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/DeepPersonReid/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-mlfn_dpr-0.39-2lmd2v.pth
+    <<: *default_msmt17_spec
+
+osnet_x1_0_dpr:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/DeepPersonReid/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-osnet_x1_0_dpr-0.76-r7rwfo.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/DeepPersonReid/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-osnet_x1_0_dpr-0.86-84eg8q.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/DeepPersonReid/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-osnet_x1_0_dpr-0.55-74gred.pth
+    <<: *default_msmt17_spec
+
+osnet_ain_x1_0_dpr:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/DeepPersonReid/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-osnet_ain_x1_0_dpr-0.74-6gid7e.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/DeepPersonReid/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-osnet_ain_x1_0_dpr-0.84-1i57qc.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/DeepPersonReid/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-osnet_ain_x1_0_dpr-0.51-qbgli6.pth
+    <<: *default_msmt17_spec
+
+osnet_ibn_x1_0_dpr:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/DeepPersonReid/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-osnet_ibn_x1_0_dpr-0.74-lddlj1.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/DeepPersonReid/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-osnet_ibn_x1_0_dpr-0.84-auq9ba.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/DeepPersonReid/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-osnet_ibn_x1_0_dpr-0.50-2er88h.pth
+    <<: *default_msmt17_spec
+
+# Reid Strong Baseline
+resnet50_bot:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/ReidStrongBaseline/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-resnet50_bot-0.76-b5qkv7.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/ReidStrongBaseline/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-resnet50_bot-0.86-frk3vj.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/ReidStrongBaseline/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-resnet50_bot-0.50-b2qw61.pth
+    <<: *default_msmt17_spec
+
+resnet50_ibn_a_bot:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/ReidStrongBaseline/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-resnet50_ibn_a_bot-0.79-c6ntv7.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/ReidStrongBaseline/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-resnet50_ibn_a_bot-0.87-bv9t4h.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/ReidStrongBaseline/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-resnet50_ibn_a_bot-0.56-viw6so.pth
+    <<: *default_msmt17_spec
+
+se_resnet50_bot:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/ReidStrongBaseline/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-se_resnet50_bot-0.77-5r1wlp.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/ReidStrongBaseline/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-se_resnet50_bot-0.86-7h1gac.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/ReidStrongBaseline/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-se_resnet50_bot-0.46-jff6cf.pth
+    <<: *default_msmt17_spec
+
+se_resnext50_bot:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/ReidStrongBaseline/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-se_resnext50_bot-0.78-5ws32c.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/ReidStrongBaseline/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-se_resnext50_bot-0.87-khcpj3.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/ReidStrongBaseline/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-se_resnext50_bot-0.55-5shogr.pth
+    <<: *default_msmt17_spec
+
+senet154_bot:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/ReidStrongBaseline/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-senet154_bot-0.78-3b57e6.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/ReidStrongBaseline/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-senet154_bot-0.86-cw58v7.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/ReidStrongBaseline/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-senet154_bot-0.58-p4vaqn.pth
+    <<: *default_msmt17_spec
+
+# transreid configuration
+transreid_mean_std: &transreid_mean_std
+  mean: [0.5, 0.5, 0.5]
+  std: [0.5, 0.5, 0.5]
+
+transreid_dukemtmcreid_spec: &transreid_dukemtmcreid_spec
+  <<: *transreid_mean_std
+  num_classes: *dukemtmcreid_num_classes
+  camera_num: 8
+
+transreid_market1501_spec: &transreid_market1501_spec
+  <<: *transreid_mean_std
+  num_classes: *market1501_num_classes
+  camera_num: 6
+
+transreid_msmt17_spec: &transreid_msmt17_spec
+  <<: *transreid_mean_std
+  num_classes: *msmt17_num_classes
+  camera_num: 15
+
+# TransReid
+deit_transreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/TransReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-deit_transreid-0.82-dda75e.pth
+    <<: *transreid_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/TransReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-deit_transreid-0.88-ncdg8t.pth
+    <<: *transreid_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/TransReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-deit_transreid-0.66-5lovj0.pth
+    <<: *transreid_msmt17_spec
+
+vit_base_transreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/TransReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-vit_base_transreid-0.79-6m3rlo.pth
+    <<: *transreid_mean_std
+    num_classes: *dukemtmcreid_num_classes
+  market1501:
+    weights_dir: model_weights/reid_models/TransReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-vit_base_transreid-0.87-n0nrbu.pth
+    <<: *transreid_mean_std
+    num_classes: *market1501_num_classes
+  msmt17:
+    weights_dir: model_weights/reid_models/TransReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-vit_base_transreid-0.62-arkebh.pth
+    <<: *transreid_mean_std
+    num_classes: *msmt17_num_classes
+
+vit_transreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/TransReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-vit_transreid-0.82-w78nld.pth
+    <<: *transreid_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/TransReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-vit_transreid-0.89-5s1bjv.pth
+    <<: *transreid_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/TransReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-vit_transreid-0.68-4gun40.pth
+    <<: *transreid_msmt17_spec
+
+# FastReid
+agw_R50_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-agw_R50_fastreid-0.79-b62bic.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-agw_R50_fastreid-0.88-ocv4kb.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-agw_R50_fastreid-0.56-mnej6c.pth
+    <<: *default_msmt17_spec
+
+agw_R50_ibn_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-agw_R50_ibn_fastreid-0.81-8c799u.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-agw_R50_ibn_fastreid-0.89-6779p2.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-agw_R50_ibn_fastreid-0.60-85qbkw.pth
+    <<: *default_msmt17_spec
+
+agw_R101_ibn_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-agw_R101_ibn_fastreid-0.81-vmndp5.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-agw_R101_ibn_fastreid-0.89-412daj.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-agw_R101_ibn_fastreid-0.61-3cuj00.pth
+    <<: *default_msmt17_spec
+
+agw_S50_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-agw_S50_fastreid-0.81-v14jr1.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-agw_S50_fastreid-0.89-b3mfwk.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-agw_S50_fastreid-0.65-qtn1gs.pth
+    <<: *default_msmt17_spec
+
+bagtricks_mobilenet_v3_large_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-bagtricks_mobilenet_v3_large_fastreid-0.69-onrctg.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-bagtricks_mobilenet_v3_large_fastreid-0.79-e3r2vo.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-bagtricks_mobilenet_v3_large_fastreid-0.43-6o0oio.pth
+    <<: *default_msmt17_spec
+
+bagtricks_osnet_ibn_x1_0_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-bagtricks_osnet_ibn_x1_0_fastreid-0.75-5pwtn0.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-bagtricks_osnet_ibn_x1_0_fastreid-0.84-f26a2n.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-bagtricks_osnet_ibn_x1_0_fastreid-0.53-t6w4oo.pth
+    <<: *default_msmt17_spec
+
+bagtricks_osnet_x1_0_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-bagtricks_osnet_x1_0_fastreid-0.77-9m9d1g.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-bagtricks_osnet_x1_0_fastreid-0.86-35pqdv.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-bagtricks_osnet_x1_0_fastreid-0.57-1d8hhd.pth
+    <<: *default_msmt17_spec
+
+bagtricks_R50_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-bagtricks_R50_fastreid-0.77-c44229.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-bagtricks_R50_fastreid-0.86-m559rt.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-bagtricks_R50_fastreid-0.52-dmj4wr.pth
+    <<: *default_msmt17_spec
+
+bagtricks_SeR50_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-bagtricks_SeR50_fastreid-0.75-3urkoj.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-bagtricks_SeR50_fastreid-0.86-wpsd45.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-bagtricks_SeR50_fastreid-0.51-3r25vw.pth
+    <<: *default_msmt17_spec
+
+bagtricks_R50_ibn_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-bagtricks_R50_ibn_fastreid-0.79-boio96.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-bagtricks_R50_ibn_fastreid-0.88-phnh6g.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-bagtricks_R50_ibn_fastreid-0.57-o236c2.pth
+    <<: *default_msmt17_spec
+
+bagtricks_R101_ibn_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-bagtricks_R101_ibn_fastreid-0.80-53htq2.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-bagtricks_R101_ibn_fastreid-0.89-sr0bgf.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-bagtricks_R101_ibn_fastreid-0.59-hg1bq5.pth
+    <<: *default_msmt17_spec
+
+bagtricks_S50_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-bagtricks_S50_fastreid-0.80-241wn1.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-bagtricks_S50_fastreid-0.89-cj9g7r.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-bagtricks_S50_fastreid-0.61-amieo7.pth
+    <<: *default_msmt17_spec
+
+bagtricks_convnext_tiny_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-bagtricks_convnext_tiny_fastreid-0.66-5j69w2.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-bagtricks_convnext_tiny_fastreid-0.77-rt1sa0.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-bagtricks_convnext_tiny_fastreid-0.38-k4ptpi.pth
+    <<: *default_msmt17_spec
+
+bagtricks_densenet121_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-bagtricks_densenet121_fastreid-0.73-e33j0h.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-bagtricks_densenet121_fastreid-0.82-8fnvo4.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-bagtricks_densenet121_fastreid-0.48-mogvtm.pth
+    <<: *default_msmt17_spec
+
+bagtricks_inception_resnet_v2_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-bagtricks_inception_resnet_v2_fastreid-0.70-wk7nco.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-bagtricks_inception_resnet_v2_fastreid-0.79-qpiave.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-bagtricks_inception_resnet_v2_fastreid-0.44-0vgk5j.pth
+    <<: *default_msmt17_spec
+
+bagtricks_inception_v3_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-bagtricks_inception_v3_fastreid-0.68-rvjcu8.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-bagtricks_inception_v3_fastreid-0.79-2gshiu.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-bagtricks_inception_v3_fastreid-0.39-9vkmmd.pth
+    <<: *default_msmt17_spec
+
+bagtricks_inception_v4_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-bagtricks_inception_v4_fastreid-0.66-8k4jmw.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-bagtricks_inception_v4_fastreid-0.75-n48556.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-bagtricks_inception_v4_fastreid-0.34-jmc57m.pth
+    <<: *default_msmt17_spec
+
+sbs_R50_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-sbs_R50_fastreid-0.80-6jdnqc.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-sbs_R50_fastreid-0.88-ecegkc.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-sbs_R50_fastreid-0.58-5r0w40.pth
+    <<: *default_msmt17_spec
+
+sbs_R50_ibn_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-sbs_R50_ibn_fastreid-0.80-mqi5g7.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-sbs_R50_ibn_fastreid-0.88-23uh39.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-sbs_R50_ibn_fastreid-0.60-tjvqrs.pth
+    <<: *default_msmt17_spec
+
+sbs_R101_ibn_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-sbs_R101_ibn_fastreid-0.81-js0s2e.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-sbs_R101_ibn_fastreid-0.89-46aole.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-sbs_R101_ibn_fastreid-0.58-tr9rm8.pth
+    <<: *default_msmt17_spec
+
+sbs_S50_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-sbs_S50_fastreid-0.80-t1p36c.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-sbs_S50_fastreid-0.88-ap2gwb.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-sbs_S50_fastreid-0.60-l2oshb.pth
+    <<: *default_msmt17_spec
+
+mgn_R50_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-mgn_R50_fastreid-0.79-h20wzg.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-mgn_R50_fastreid-0.87-d6xic3.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-mgn_R50_fastreid-0.57-rtzv5g.pth
+    <<: *default_msmt17_spec
+
+mgn_R50_ibn_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-mgn_R50_ibn_fastreid-0.79-l5hd5r.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-mgn_R50_ibn_fastreid-0.88-n2frxq.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-mgn_R50_ibn_fastreid-0.59-he8qcq.pth
+    <<: *default_msmt17_spec
+
+mgn_sbs_R50_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-mgn_sbs_R50_fastreid-0.80-n29js6.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-mgn_sbs_R50_fastreid-0.89-y2rmpa.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-mgn_sbs_R50_fastreid-0.62-1wgtqq.pth
+    <<: *default_msmt17_spec
+
+mgn_sbs_R50_ibn_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-mgn_sbs_R50_ibn_fastreid-0.81-lsoi9c.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-mgn_sbs_R50_ibn_fastreid-0.89-jrb9k3.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-mgn_sbs_R50_ibn_fastreid-0.65-gfq4tw.pth
+    <<: *default_msmt17_spec
+
+mgn_agw_R50_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-mgn_agw_R50_fastreid-0.79-122ijm.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-mgn_agw_R50_fastreid-0.88-u3bbfv.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-mgn_agw_R50_fastreid-0.59-1qec7g.pth
+    <<: *default_msmt17_spec
+
+mgn_agw_R50_ibn_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-mgn_agw_R50_ibn_fastreid-0.79-7w8ukp.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-mgn_agw_R50_ibn_fastreid-0.87-egrrbl.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-mgn_agw_R50_ibn_fastreid-0.59-6o7aqv.pth
+    <<: *default_msmt17_spec
+
+mgn_S50_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-mgn_S50_fastreid-0.76-1qxbye.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-mgn_S50_fastreid-0.86-h9prpe.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-mgn_S50_fastreid-0.57-2n50pr.pth
+    <<: *default_msmt17_spec
+
+mgn_S50_ibn_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-mgn_S50_ibn_fastreid-0.76-z7lwdg.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-mgn_S50_ibn_fastreid-0.86-u4wrzj.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-mgn_S50_ibn_fastreid-0.56-uzams0.pth
+    <<: *default_msmt17_spec
+
+mgn_sbs_S50_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-mgn_sbs_S50_fastreid-0.82-b8sntq.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-mgn_sbs_S50_fastreid-0.89-royti9.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-mgn_sbs_S50_fastreid-0.66-exhd7a.pth
+    <<: *default_msmt17_spec
+
+mgn_sbs_S50_ibn_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-mgn_sbs_S50_ibn_fastreid-0.82-meo43g.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-mgn_sbs_S50_ibn_fastreid-0.89-gnvi65.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-mgn_sbs_S50_ibn_fastreid-0.66-kmd7c3.pth
+    <<: *default_msmt17_spec
+
+mgn_agw_S50_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-mgn_agw_S50_fastreid-0.78-ois4pz.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-mgn_agw_S50_fastreid-0.87-p6spkw.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-mgn_agw_S50_fastreid-0.60-8aaiba.pth
+    <<: *default_msmt17_spec
+
+mgn_agw_S50_ibn_fastreid:
+  dukemtmcreid:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/dukemtmcreid-mgn_agw_S50_ibn_fastreid-0.79-msjjio.pth
+    <<: *default_dukemtmcreid_spec
+  market1501:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/market1501-mgn_agw_S50_ibn_fastreid-0.87-3qvpbk.pth
+    <<: *default_market1501_spec
+  msmt17:
+    weights_dir: model_weights/reid_models/FastReID/
+    url: https://github.com/HWliiu/pytorch-reid-models/releases/download/v0.1-weights/msmt17-mgn_agw_S50_ibn_fastreid-0.60-1ctheq.pth
+    <<: *default_msmt17_spec

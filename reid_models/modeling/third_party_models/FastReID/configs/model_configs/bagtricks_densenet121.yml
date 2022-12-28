@@ -1,0 +1,15 @@
+_BASE_: ../Base-bagtricks.yml
+
+MODEL:
+  BACKBONE:
+    NAME: build_densenet_backbone
+    DEPTH: 121x
+    FEAT_DIM: 1024
+  HEADS:
+    NUM_CLASSES: 751
+
+DATASETS:
+  NAMES: ("Market1501",)
+  TESTS: ("Market1501",)
+
+OUTPUT_DIR: logs/market1501/bagtricks_densenet121
