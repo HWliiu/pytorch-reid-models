@@ -74,6 +74,7 @@ def build_train_dataset(
         )
     train_sample = _combine([sample.train for sample in samples])
     train_dataset = ReIDDataset(train_sample, transform=transforms)
+    train_dataset.name = "_".join(dataset_names)
 
     return train_dataset
 
@@ -139,6 +140,7 @@ def build_test_datasets(
             sample.query = [query for i, query in enumerate(sample.query) if i in index]
         query_dataset = ReIDDataset(sample.query, transform=transforms)
         gallery_dataset = ReIDDataset(sample.gallery, transform=transforms)
+        query_dataset.name = gallery_dataset.name = dataset_name
         query_gallery_datasets[dataset_name] = (query_dataset, gallery_dataset)
 
     return query_gallery_datasets
