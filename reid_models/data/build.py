@@ -63,11 +63,19 @@ def build_train_dataset(
     image_size: Tuple[int, int] = None,
     transforms: Union[Tuple[str], Callable] = None,
     combineall: bool = False,
+    per_dataset_num: int = None,
     **kwargs
 ):
     logger = logging.getLogger(__name__)
     logger.info(colored("building train datasets ... ... ", attrs=["bold"]))
     samples = build_dataset_samples(dataset_names, combineall)
+
+    if per_dataset_num is not None:
+        for sample in samples:
+            total_num = len(sample.train)
+            index = np.linspace(0, total_num, per_dataset_num, False).astype(int)
+            sample.train = [train for i, train in enumerate(sample.train) if i in index]
+
     if not callable(transforms):
         transforms = build_transforms(
             image_size=image_size, transforms_list=transforms, **kwargs
