@@ -12,9 +12,16 @@ import numpy as np
 import torch
 from einops import rearrange, reduce, repeat
 from fvcore.common.registry import Registry
-from pytorch_grad_cam import (EigenCAM, EigenGradCAM, GradCAM,
-                              GradCAMElementWise, GradCAMPlusPlus, HiResCAM,
-                              LayerCAM, XGradCAM)
+from pytorch_grad_cam import (
+    EigenCAM,
+    EigenGradCAM,
+    GradCAM,
+    GradCAMElementWise,
+    GradCAMPlusPlus,
+    HiResCAM,
+    LayerCAM,
+    XGradCAM,
+)
 from pytorch_grad_cam.utils.image import show_cam_on_image
 from torch.utils import data
 from torchvision.transforms.functional import to_pil_image
@@ -209,12 +216,12 @@ class VisualizerRankListWithGradCAM(VisualizerRankList):
 
     def __call__(self, imgs, pids, camids, save_fname):
         with torch.no_grad():
-            topk_sim, topk_index = self.matcher(imgs, pids, camids)
+            match_results = self.matcher(imgs, pids, camids)
             q_feats = self._forward(imgs, pids, camids)
 
         m_loader = data.DataLoader(
             self.g_dataset,
-            batch_sampler=topk_index.cpu(),
+            batch_sampler=match_results.indices.cpu(),
             # FIXME: fix bug when num_workers!=0
             num_workers=0,
         )
@@ -244,7 +251,7 @@ class VisualizerRankListWithGradCAM(VisualizerRankList):
                 self._plot_single_image(
                     self.axes[0, j + 1],
                     m_imgs[j],
-                    title=f"sim:{topk_sim[i,j]:.2f}",
+                    title=f"sim:{match_results.sims[i,j]:.2f}",
                     ylabel=f"Match" if j == 0 else None,
                     xlabel=f"p:{m_pids[j].item():0>4} c:{m_camids[j].item():0>2}",
                     edge_color=("g" if q_pid == m_pids[j] else "r")

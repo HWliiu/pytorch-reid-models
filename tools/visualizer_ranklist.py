@@ -75,12 +75,12 @@ class VisualizerRankList:
 
     def __call__(self, imgs, pids, camids, save_fname):
         with torch.no_grad():
-            topk_sim, topk_index = self.matcher(imgs, pids, camids)
+            match_results = self.matcher(imgs, pids, camids)
         fig, axes = self._get_figure_and_axes(len(imgs))
 
         m_loader = data.DataLoader(
             self.g_dataset,
-            batch_sampler=topk_index.cpu(),
+            batch_sampler=match_results.indices.cpu(),
             # FIXME: fix bug when num_workers!=0
             num_workers=0,
         )
@@ -96,7 +96,7 @@ class VisualizerRankList:
                 self._plot_single_image(
                     axes[i, j + 1],
                     m_imgs[j],
-                    title=f"sim:{topk_sim[i,j]:.2f}",
+                    title=f"sim:{match_results.sims[i,j]:.2f}",
                     ylabel=f"Match" if j == 0 else None,
                     xlabel=f"p:{m_pids[j].item():0>4} c:{m_camids[j].item():0>2}",
                     edge_color=("g" if q_pid == m_pids[j] else "r")
@@ -117,7 +117,7 @@ def main():
 
     accelerator = accelerate.Accelerator(mixed_precision="fp16")
 
-    model_names = ["sbs_S50_fastreid"]
+    model_names = ["bagtricks_R50_fastreid"]
     for model_name in model_names:
         for dataset_name, (q_data_loader, g_data_loader) in test_dataloaders.items():
             model = build_reid_model(model_name, dataset_name)
