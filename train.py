@@ -12,7 +12,7 @@ import torch.nn as nn
 from prettytable import PrettyTable
 from pytorch_metric_learning.losses import TripletMarginLoss
 from pytorch_metric_learning.miners import BatchEasyHardMiner
-from torch.optim.lr_scheduler import MultiStepLR
+from torch.optim.lr_scheduler import CosineAnnealingLR
 from tqdm.auto import tqdm
 
 from reid_models.data import build_test_dataloaders, build_train_dataloader
@@ -68,15 +68,16 @@ def main():
 
     accelerator = accelerate.Accelerator(mixed_precision="fp16")
 
-    test_dataset_names = ["dukemtmcreid", "market1501"]
+    test_dataset_names = ["msmt17"]
     test_loaders = build_test_dataloaders(dataset_names=test_dataset_names)
-    train_dataset_names = ["dukemtmcreid"]
+    train_dataset_names = ["msmt17"]
     train_loader = build_train_dataloader(
         dataset_names=train_dataset_names,
         transforms=["randomflip", "randomcrop", "rea"],
         batch_size=64,
         sampler="pk",
         num_instance=4,
+        persistent_workers=True,
     )
 
     model_name = "bagtricks_R50_fastreid"
@@ -94,14 +95,14 @@ def main():
     save_dir = Path(f"logs/train")
     save_dir.mkdir(parents=True, exist_ok=True)
 
+    max_epoch = 60
     optimizer = torch.optim.Adam(model.parameters(), lr=3.5e-4, weight_decay=5e-4)
-    scheduler = MultiStepLR(optimizer, milestones=[40, 90], gamma=0.1)
+    scheduler = CosineAnnealingLR(optimizer, T_max=max_epoch, eta_min=7e-7)
 
     miner = BatchEasyHardMiner()
     criterion_t = TripletMarginLoss(margin=0.3)
     criterion_x = nn.CrossEntropyLoss(label_smoothing=0.1)
 
-    max_epoch = 120
     for epoch in range(1, max_epoch + 1):
         train(
             accelerator,

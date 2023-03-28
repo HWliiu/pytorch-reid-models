@@ -121,6 +121,7 @@ def build_train_dataloader(
         shuffle=shuffle,
         sampler=sampler,
         pin_memory=True,
+        persistent_workers=kwargs.get("persistent_workers", False),
     )
 
     return train_data_loader
