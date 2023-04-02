@@ -3,19 +3,20 @@ author: Huiwang Liu
 e-mail: liuhuiwang1025@outlook.com
 """
 
-import torchvision.transforms as transforms
+from torch.nn import ModuleList
+import torchvision.transforms as T
 
 _transforms_factory_before = {
-    "autoaug": transforms.AutoAugment(),
-    "randomflip": transforms.RandomHorizontalFlip(p=0.5),
-    "randomcrop": transforms.RandomCrop((256, 128), padding=10),
-    "colorjitor": transforms.ColorJitter(
-        brightness=0.25, contrast=0.15, saturation=0.25, hue=0
+    "autoaug": T.RandomApply(ModuleList([T.AutoAugment()]), p=0.1),
+    "randomflip": T.RandomHorizontalFlip(p=0.5),
+    "randomcrop": T.RandomCrop((256, 128), padding=10),
+    "colorjitor": T.ColorJitter(
+        brightness=0.25, contrast=0.25, saturation=0.25, hue=0.15
     ),
-    "augmix": transforms.AugMix(),
+    "augmix": T.RandomApply(ModuleList([T.AugMix()]), p=0.1),
 }
 
-_transforms_factory_after = {"rea": transforms.RandomErasing()}
+_transforms_factory_after = {"rea": T.RandomErasing()}
 
 
 def build_transforms(image_size, transforms_list, **kwargs):
@@ -34,15 +35,15 @@ def build_transforms(image_size, transforms_list, **kwargs):
             transform,
         )
 
-    trans = [transforms.Resize(image_size)]
+    trans = [T.Resize(image_size)]
     for transform in transforms_list:
         if transform in _transforms_factory_before.keys():
             trans.append(_transforms_factory_before[transform])
 
-    trans.append(transforms.ToTensor())
+    trans.append(T.ToTensor())
 
     for transform in transforms_list:
         if transform in _transforms_factory_after.keys():
             trans.append(_transforms_factory_after[transform])
 
-    return transforms.Compose(trans)
+    return T.Compose(trans)
