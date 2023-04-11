@@ -10,7 +10,7 @@ import torch
 import torch.nn as nn
 import torchvision.transforms as T
 from kornia.metrics import accuracy
-from torch.optim.lr_scheduler import StepLR
+from torch.optim.lr_scheduler import CosineAnnealingWarmRestarts
 from torch.utils.data import DataLoader
 from torchvision.datasets import ImageFolder
 from tqdm.auto import tqdm
@@ -19,7 +19,9 @@ from reid_models.modeling import _build_reid_model
 from reid_models.utils import setup_logger
 
 
-def train(accelerator, model, train_loader, optimizer, criterion, max_epoch, epoch):
+def train(
+    accelerator, model, train_loader, optimizer, scheduler, criterion, max_epoch, epoch
+):
     model.train()
     bar = tqdm(
         train_loader,
@@ -40,9 +42,11 @@ def train(accelerator, model, train_loader, optimizer, criterion, max_epoch, epo
             if accelerator.sync_gradients:
                 accelerator.clip_grad_value_(model.parameters(), 1e-1)
             optimizer.step()
+            scheduler.step()
 
         acc = (logits.max(1)[1] == lbls).float().mean()
-        bar.set_postfix_str(f"loss:{loss.item():.1f} " f"acc:{acc.item():.1f}")
+        lr = scheduler.get_last_lr()[0]
+        bar.set_postfix_str(f"loss:{loss.item():.1f} acc:{acc.item():.1f} lr:{lr:.1e}")
     bar.close()
 
 
@@ -97,7 +101,6 @@ def main():
         mixed_precision="fp16",
         gradient_accumulation_steps=2,
         project_dir=logs_dir,
-        step_scheduler_with_optimizer=False,
         kwargs_handlers=[kwargs],
     )
 
@@ -127,7 +130,7 @@ def main():
     test_dataset = ImageFolder("datasets/ImageNet2012/val", transform=test_transform)
     test_loader = DataLoader(
         test_dataset,
-        batch_size=256,
+        batch_size=128,
         num_workers=8,
         pin_memory=True,
     )
@@ -144,18 +147,22 @@ def main():
 
     # build optimizer
     criterion = nn.CrossEntropyLoss()
-    optimizer = torch.optim.RAdam(model.parameters(), lr=1e-3, weight_decay=1e-4)
-    scheduler = StepLR(optimizer, step_size=6, gamma=0.1)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=1e-3, weight_decay=1e-4)
 
     # start training
-    train_loader, test_loader, model, optimizer, scheduler = accelerator.prepare(
-        train_loader, test_loader, model, optimizer, scheduler
+    train_loader, test_loader, model, optimizer = accelerator.prepare(
+        train_loader, test_loader, model, optimizer
+    )
+    scheduler = accelerator.prepare(
+        CosineAnnealingWarmRestarts(
+            optimizer, T_0=len(train_loader), T_mult=1, eta_min=1e-7
+        )
     )
 
     save_dir = Path(logs_dir)
     save_dir.mkdir(parents=True, exist_ok=True)
 
-    max_epoch = 18
+    max_epoch = 30
     start_epoch = 1
     # accelerator.load_state(accelerator.project_dir)
     for epoch in range(start_epoch, max_epoch + 1):
@@ -165,11 +172,11 @@ def main():
             model,
             train_loader,
             optimizer,
+            scheduler,
             criterion,
             max_epoch,
             epoch,
         )
-        scheduler.step()
 
         # save model
         accelerator.save(
