@@ -44,6 +44,7 @@ We collected some ReID models from open-source projects and provided a unified i
 - We rewrite a CUDA-accelerated version of the ReID evaluation code, which has a huge speedup compared to the previous numpy version. For details, see [reid_models/evaluate/eval_function.py](reid_models/evaluate/eval_function.py).
 - For each third-party ReID project, we provide a way to dynamically register the model, as seen [reid_models/modeling/third_party_models/FastReID/\_\_init\_\_.py](reid_models/modeling/third_party_models/FastReID/__init__.py). We will expand more models in the future.
 - We provide some useful visualization, training and testing tools, as seen in [tools](tools)
+- We provide an efficient pre-training code for the ImageNet1k dataset, based on the accelerate library, as see in [tools/imagenet_pretrain.py](tools/imagenet_pretrain.py)
 
 ## Configuration files
 
